@@ -1,0 +1,24 @@
+'use strict'
+const express = require('express'),
+      app = express(),
+      morgan = require ('morgan'),
+      AppRoutes = require('./Routes/routes');
+const sequalize = require("./Conexion/db")
+      require("dotenv").config()
+
+
+      //Estableciendo los middleware y corriendo la app
+      const port = process.env.PORT || 3000; 
+      app.use(express.json())
+      app.use(morgan('dev'));
+      app.use(AppRoutes)
+      app.listen(port, ()=>{
+         console.log(`http:localhost:${port}`)
+         sequalize.authenticate().then(()=>{
+             console.log("Conexion establecida")
+      }).catch(error=>{
+         console.log(`Se ha producido un error`, error)
+         })
+     })
+     
+     
