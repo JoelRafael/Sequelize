@@ -14,7 +14,7 @@ const sequalize = require("./Conexion/db")
       app.use(AppRoutes)
       app.listen(port, ()=>{
          console.log(`http:localhost:${port}`)
-         sequalize.authenticate().then(()=>{
+         sequalize.sync({force:true}).then(()=>{
              console.log("Conexion establecida")
       }).catch(error=>{
          console.log(`Se ha producido un error`, error)
